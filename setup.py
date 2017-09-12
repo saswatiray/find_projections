@@ -1,5 +1,5 @@
-#from setuptools import setup
-from distutils.core import setup, Extension
+from setuptools import setup
+from distutils.core import Extension
 import os
 
 NAME = 'find_projections'
