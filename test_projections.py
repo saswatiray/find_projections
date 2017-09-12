@@ -2,7 +2,7 @@
 
 import sys, csv
 import numpy
-import search_projections
+import find_projections.search_projections as search_projections
 
 # Read input feature set
 reader = csv.reader(open(sys.argv[1], "r"), delimiter=",")
@@ -20,8 +20,8 @@ ds.setOutputForClassification(output)
 
 # Create search object and parameters
 search_object = search_projections.Search()
-binsize = 100
-support = 5000
+binsize = 10
+support = 100
 purity = 0.9
 mode = 1
 num_threads = 1
@@ -61,7 +61,6 @@ output = numpy.array(x).astype("float")[:,0]
 
 ds.setOutputForRegression(output)
 
-support = 1000
 # Search comprehensively for projection boxes
 fmap = search_object.search_projections(ds, binsize, support, purity, mode, num_threads)
 
