@@ -20,8 +20,8 @@ ds.setOutputForClassification(output)
 
 # Create search object and parameters
 search_object = search_projections.Search()
-binsize = 10
-support = 100
+binsize = 100
+support = 5000
 purity = 0.9
 mode = 1
 num_threads = 1

@@ -457,7 +457,7 @@ feature_map *search_for_max_subrectangles(Datset &ds, feature_tree *ftree, std::
     } /* Ends for loop for 'j' att */
 
     if(is_power_of_two(i))
-      printf("Finished all projections containing feature %d\n", i);
+      printf("Finished all projections containing feature number %d\n", i);
   } /* Ends for loop for 'i' att*/
 
   return table;
@@ -472,7 +472,7 @@ feature_map *search_for_max_subrectangles(Datset &ds, feature_tree *ftree, std::
  */
 feature_map *search::search_projections(Datset& ds, int bin_size, int support, double purity_threshold, int mode, int num_threads) {
   feature_map *table = NULL;
-
+  const clock_t begin_time = std::clock();
   bool valid = validate_params(ds, bin_size, support, purity_threshold, num_threads, mode);
   if(!valid)
     return NULL;
@@ -496,6 +496,7 @@ feature_map *search::search_projections(Datset& ds, int bin_size, int support, d
   delete ftree;
   delete ia;
 
+  printf("Time taken = %d sec\n", (int)(std::clock() - begin_time ) /  CLOCKS_PER_SEC);
   return table;
 }
 
