@@ -15,8 +15,9 @@ Run the following command for building and installing package-
 python setup.py install
 
 In python,
-
 import find_projections.
+
+For creating a wheel distribution, run python setup.py bdist_wheel.
 
 API documentation is included in Python_API_DOC.pdf and usage has been shown in test.py.
 
