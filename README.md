@@ -11,9 +11,12 @@ Uses boost ver. 1.65.
 Uses pthreads for multi-threading support.
 
 Run the following command for building and installing package-
+
 python setup.py install
 
-In python, import find_projections.
+In python,
+
+import find_projections.
 
 API documentation is included in Python_API_DOC.pdf and usage has been shown in test.py.
 
