@@ -9,6 +9,8 @@
 #ifndef DATSET_H_
 #define DATSET_H_
 
+#define NPY_NO_DEPRECATED_API NPY_1_7_API_VERSION
+
 #include <boost/python.hpp>
 #include <numpy/arrayobject.h>
 namespace p = boost::python;

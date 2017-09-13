@@ -67,7 +67,7 @@ void Datset::fill_datset_output_for_classification(PyObject *object) {
   this->num_classes = uniqueCount;
 }
 
-void Datset::fill_datset_output_for_regression(PyObject *array) {
+void Datset::fill_datset_output_for_regression(PyObject *object) {
   is_classifier = false;
 
   if(output_class)
@@ -79,6 +79,7 @@ void Datset::fill_datset_output_for_regression(PyObject *array) {
   this->num_classes = -1;
 
   output_regress = new std::vector<double>(rows);
+  PyArrayObject *array = reinterpret_cast<PyArrayObject *>(object);
   double *iter = reinterpret_cast< double * >( PyArray_GETPTR1(array, 0) );
   for (int i = 0; i < rows; ++i) {
     double val = iter[i];

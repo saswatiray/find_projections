@@ -52,7 +52,7 @@ for i in range(num):
 # REGRESSION
 ds.setOutputForRegression(output)
 
-support = 20
+support = 10
 # Search comprehensively for projection boxes
 fmap = search_object.search_projections(ds, binsize, support, purity, mode, num_threads)
 

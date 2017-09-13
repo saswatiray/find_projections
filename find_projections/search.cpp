@@ -20,6 +20,7 @@
 #include "numeric_projection.hpp"
 
 #include <vector>
+#include <set>
 
 static indices_array *remove_projection(indices_array &ia, projection *pr);
 
