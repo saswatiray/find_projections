@@ -9,8 +9,8 @@ REQUIRES = ['numpy >= 1.13']
 
 find_projections_module = Extension('libfind_projections',
 		           sources = ['find_projections/binary_tree.cpp', 'find_projections/projection.cpp', 'find_projections/search.cpp', 'find_projections/helper.cpp', 'find_projections/numeric_binary_tree.cpp', 'find_projections/discrete_binary_tree.cpp', 'find_projections/datset.cpp', 'find_projections/pyfind_projections.cpp'],
-				   extra_compile_args=['-pthread'],
-				   extra_link_args=['-shared', '-pthread', '-lboost_python', '-lboost_numpy']
+				   extra_compile_args=['-pthread', '-std=c++14'],
+				   extra_link_args=['-shared', '-pthread', '-lboost_python']
 )
 
 setup(

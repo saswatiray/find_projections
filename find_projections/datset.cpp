@@ -8,14 +8,16 @@
 
 #include "datset.hpp"
 
-Datset::Datset(np::ndarray & array) {
-  rows = array.shape(0);
-  cols = array.shape(1);
+Datset::Datset(PyObject *object) {
+  PyArrayObject *array = reinterpret_cast<PyArrayObject *>(object);
+  rows = PyArray_DIM(array, 0);
+  cols = PyArray_DIM(array, 1);
   num_classes = -1;
  
+  double *iter = reinterpret_cast< double * >( PyArray_GETPTR2(array, 0, 0) );
+
   darray = new matrix<double>(rows, cols);
   
-  double *iter = reinterpret_cast<double*>(array.get_data());
   for (int i = 0; i < rows; ++i) {
     for (int j = 0; j < cols; ++j) {
       double val = iter[i*cols + j];
@@ -36,7 +38,7 @@ double Datset::ds_output_ref(int i) {
   return val;
 }
 
-void Datset::fill_datset_output_for_classification(np::ndarray & array) {
+void Datset::fill_datset_output_for_classification(PyObject *object) {
   is_classifier = true;
 
   if(output_class)
@@ -48,7 +50,8 @@ void Datset::fill_datset_output_for_classification(np::ndarray & array) {
 
   output_class = new std::vector<int>(rows);
 
-  double *iter = reinterpret_cast<double*>(array.get_data());
+  PyArrayObject *array = reinterpret_cast<PyArrayObject *>(object);
+  double *iter = reinterpret_cast< double * >( PyArray_GETPTR1(array, 0) );
   for (int i = 0; i < rows; ++i) {
     int val = (int)iter[i];
     (*output_class)[i] = val;
@@ -64,7 +67,7 @@ void Datset::fill_datset_output_for_classification(np::ndarray & array) {
   this->num_classes = uniqueCount;
 }
 
-void Datset::fill_datset_output_for_regression(np::ndarray & array) {
+void Datset::fill_datset_output_for_regression(PyObject *array) {
   is_classifier = false;
 
   if(output_class)
@@ -76,7 +79,7 @@ void Datset::fill_datset_output_for_regression(np::ndarray & array) {
   this->num_classes = -1;
 
   output_regress = new std::vector<double>(rows);
-  double *iter = reinterpret_cast<double*>(array.get_data());
+  double *iter = reinterpret_cast< double * >( PyArray_GETPTR1(array, 0) );
   for (int i = 0; i < rows; ++i) {
     double val = iter[i];
     (*output_regress)[i] = val;

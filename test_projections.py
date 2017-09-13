@@ -5,24 +5,20 @@ import numpy
 import find_projections.search_projections as search_projections
 
 # Read input feature set
-reader = csv.reader(open(sys.argv[1], "r"), delimiter=",")
-x = list(reader)
-result = numpy.array(x).astype("float")
+result = numpy.random.rand(1000,2).astype("float")
 
 ds = search_projections.Datset(result)
 
 # CLASSIFICATION
 # Read output feature for classification
-reader = csv.reader(open(sys.argv[2], "r"), delimiter=",")
-x = list(reader)
-output = numpy.array(x).astype("float")[:,0]
+output = numpy.random.randint(2, size=(1000,)).astype("float")
 ds.setOutputForClassification(output)
 
 # Create search object and parameters
 search_object = search_projections.Search()
-binsize = 100
-support = 5000
-purity = 0.9
+binsize = 10
+support = 100
+purity = 0.5
 mode = 1
 num_threads = 1
 
@@ -54,13 +50,9 @@ for i in range(num):
   pr.pprojection()
 
 # REGRESSION
-# Read output feature for regression
-reader = csv.reader(open(sys.argv[2], "r"), delimiter=",")
-x = list(reader)
-output = numpy.array(x).astype("float")[:,0]
-
 ds.setOutputForRegression(output)
 
+support = 20
 # Search comprehensively for projection boxes
 fmap = search_object.search_projections(ds, binsize, support, purity, mode, num_threads)
 

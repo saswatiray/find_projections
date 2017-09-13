@@ -9,10 +9,9 @@
 #ifndef DATSET_H_
 #define DATSET_H_
 
-#include <boost/python/numpy.hpp>
-
+#include <boost/python.hpp>
+#include <numpy/arrayobject.h>
 namespace p = boost::python;
-namespace np = boost::python::numpy;
 
 #include <boost/numeric/ublas/matrix.hpp>
 
@@ -33,10 +32,10 @@ class Datset {
 
  public:
   Datset();
-  Datset(np::ndarray & array);
+  Datset(PyObject *array);
 
-  void fill_datset_output_for_classification(np::ndarray  & array);
-  void fill_datset_output_for_regression(np::ndarray & array);
+  void fill_datset_output_for_classification(PyObject *array);
+  void fill_datset_output_for_regression(PyObject *array);
   double ds_real_ref(int i, int j);
   double ds_output_ref(int i);
   int get_num_classes() {

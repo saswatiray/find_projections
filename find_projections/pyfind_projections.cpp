@@ -6,7 +6,7 @@
 #include "numeric_projection.hpp"
 #include "feature_map.hpp"
 
-namespace np = boost::python::numpy;
+//namespace np = boost::python::numpy;
 
 /*
  * Wrapper for C++ base abstract class
@@ -49,9 +49,9 @@ BOOST_PYTHON_MODULE(libfind_projections) {
   using namespace boost::python;
 
   Py_Initialize();
-  np::initialize();
+  //np::initialize();
 
-  class_<Datset>("Datset", init<np::ndarray &>())
+  class_<Datset>("Datset", init<PyObject *>())
   .def("fill_datset_output_for_classification", &Datset::fill_datset_output_for_classification)
   .def("fill_datset_output_for_regression", &Datset::fill_datset_output_for_regression)
   .def("is_valid", &Datset::is_valid)
