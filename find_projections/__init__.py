@@ -1,1 +1,1 @@
-from search_projections import Search
+from .search_projections import Search

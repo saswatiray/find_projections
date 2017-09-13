@@ -51,7 +51,7 @@ class Search:
      def search_projections(self, ds, binsize=10, support=50, purity=0.9, mode=1, num_threads=1):
          valid = validate_params(ds, binsize, support, purity, mode, num_threads)
          if valid is False:
-             print "Invalid parameters!"
+             print("Invalid parameters!")
              return None
          return FeatureMap(self.search_obj.search_projections(ds.ds, binsize, support, purity, mode, num_threads))
 
@@ -77,7 +77,7 @@ class Search:
      def find_easy_explain_data(self, ds, validation_size=0.1, binsize=10, support=50, purity=0.9, mode=1, num_threads=1):
          valid = validate_params(ds, binsize, support, purity, mode, num_threads)
          if valid is False:
-             print "Invalid parameters!"
+             print("Invalid parameters!")
              return None
          if ( validation_size <= 0.0 ) or ( validation_size > 0.5 ) :
              return None
@@ -114,7 +114,7 @@ class Datset:
          rows = data.shape[0]
          cols = data.shape[1]
 
-         if data.dtype <> 'float':
+         if data.dtype not in np.sctypes['float']:
              return None
 
          self.ds = libfind_projections.Datset(data)
