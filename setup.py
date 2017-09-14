@@ -1,6 +1,15 @@
 from setuptools import setup
 from distutils.core import Extension
-import os
+import os, sys
+
+import pip
+pip.main(['install', '--user', 'numpy'])
+
+home_folder = os.path.expanduser("~")
+user_site_packages_folder = "{0}/.local/lib/python{1}.{2}/site-packages".format(home_folder, sys.version_info[0], sys.version_info[1])
+if user_site_packages_folder not in sys.path:
+	    sys.path.append(user_site_packages_folder)
+
 import numpy as np
 
 NAME = 'find_projections'
