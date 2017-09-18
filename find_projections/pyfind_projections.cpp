@@ -40,6 +40,9 @@ public:
   void copy_projection(projection_wrap *pr) {
     this->get_override("copy_projection")();
   }
+  double get_projection_metric() {
+	this->get_override("get_projection_metric")();
+  }
 };
 
 /*
@@ -70,9 +73,11 @@ BOOST_PYTHON_MODULE(libfind_projections) {
     .def("get_att2", &projection::get_att2)
     .def("get_att1_start", &projection::get_att1_start)
     .def("get_att2_start", &projection::get_att2_start)
-     .def("get_att1_end", &projection::get_att1_end)
+    .def("get_att1_end", &projection::get_att1_end)
     .def("get_att2_end", &projection::get_att2_end)
-    ;
+    .def("get_projection_metric", pure_virtual(&projection::get_projection_metric))
+	.def("point_lies_in_projection", &projection::point_lies_in_projection)
+	;
 
   class_<discrete_projection, bases<projection> >("discrete_projection")
     .def("get_pos", &discrete_projection::get_pos)

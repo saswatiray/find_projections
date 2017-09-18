@@ -87,6 +87,11 @@ class projection {
   bool point_lies_in_projection(Datset &ds, int row);
 
   /*
+   * Returns the projection metric (class label for discrete_projection / mean for numeric_projection)
+   */
+  virtual double get_projection_metric() = 0;
+
+  /*
    * Creates projection from -
    * att1's row subset (start-end) of ivatt1
    * att2's row subset selected in binary tree 'node' of ivatt2

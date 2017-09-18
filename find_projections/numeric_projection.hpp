@@ -150,6 +150,13 @@ class numeric_projection : public projection {
     R2 = 1.0 - (sum / variance);
     return R2;
   }
+
+  /*
+   * Returns the projection metric (class label for discrete_projection / mean for numeric_projection)
+   */
+  double get_projection_metric() {
+    return mean;
+  }
 };
 
 #endif

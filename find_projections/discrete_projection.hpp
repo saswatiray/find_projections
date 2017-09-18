@@ -115,6 +115,13 @@ class discrete_projection : public projection {
     *support = count;
     return (double)class_count/(double)count;
   }
+
+  /*
+   * Returns the projection metric (class label for discrete_projection / mean for numeric_projection)
+   */
+  double get_projection_metric() {
+    return class_label;
+  }
 };
 
 #endif
