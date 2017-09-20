@@ -93,7 +93,7 @@ class numeric_projection : public projection {
       double label = ds.ds_output_ref(r);
       
       if(this->point_lies_in_projection(ds, r) == true) {
-	count++;
+	    count++;
         sum += label;
       }
     }

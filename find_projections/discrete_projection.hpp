@@ -106,9 +106,9 @@ class discrete_projection : public projection {
       int label = (int)ds.ds_output_ref(r);
       
       if(this->point_lies_in_projection(ds, r) == true) {
-	count++;
-	if(label == this->class_label)
-	  class_count++;
+	    count++;
+	    if(label == this->class_label)
+	      class_count++;
       }
     }
     

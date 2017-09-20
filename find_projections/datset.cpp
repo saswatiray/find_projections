@@ -88,7 +88,13 @@ void Datset::fill_datset_output_for_regression(PyObject *object) {
 }
 
 Datset::~Datset() {
+  if(darray)
+	delete darray;
   darray = NULL;
+  if(output_class)
+	delete output_class;
   output_class = NULL;
+  if(output_regress)
+	delete output_regress;
   output_regress = NULL;
 }

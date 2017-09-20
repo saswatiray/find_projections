@@ -544,7 +544,7 @@ projection_array *search::find_easy_explain_data(Datset& ds, double val_prop, in
   std::random_shuffle(seq.begin(), seq.end());
 
   std::vector<int> *train_rows = Helper::get_vector_subset(seq, 0, train_prop);
-  std::vector<int> *val_rows = Helper::get_vector_subset(seq, train_prop+1, rows);
+  std::vector<int> *val_rows = Helper::get_vector_subset(seq, train_prop, rows);
 
   printf("No. of train rows = %lu, val rows = %lu\n", train_rows->size(), val_rows->size());
 
@@ -581,26 +581,23 @@ projection_array *search::find_easy_explain_data(Datset& ds, double val_prop, in
         prlist array = table->getListOfProjections(i, j);
         for(k=0; k<array.size(); k++) {
           projection *bestprojection = array.get(k); 
-          
-          if(is_projection_better(bestprojection, mode, is_numeric_problem, maxsupport, mean, sqerr)) {
-            int valsupport = 0;
-            bool better = bestprojection->is_projection_good_on_validation_set(ds, *val_rows, mode, mean, purity, &valsupport);
-            if(better) {
-              if(pr)
-                delete pr;
-              if(is_numeric_problem) {
-                numeric_projection *np = new numeric_projection();
-                mean = np->get_mean();
-                sqerr = np->get_sum_sq_error();
-                pr = np;
-              }
-              else {
-                discrete_projection *dp = new discrete_projection();
-                maxsupport = dp->get_total();
-                pr = dp;
-              }
-          bestprojection->copy_projection(pr);  
-        }
+          int valsupport = 0;
+          if(is_projection_better(bestprojection, mode, is_numeric_problem, maxsupport, mean, sqerr) &&
+             bestprojection->is_projection_good_on_validation_set(ds, *val_rows, mode, mean, purity, &valsupport)) {
+            if(pr)
+              delete pr;
+            if(is_numeric_problem) {
+              numeric_projection *np = new numeric_projection();
+              mean = np->get_mean();
+              sqerr = np->get_sum_sq_error();
+              pr = np;
+            }
+            else {
+              discrete_projection *dp = new discrete_projection();
+              maxsupport = dp->get_total();
+              pr = dp;
+            }
+            bestprojection->copy_projection(pr);  
           }
         } //End loop for k
       } // End loop for j
