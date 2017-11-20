@@ -7,19 +7,19 @@ For discrete output, the algorithm tries to find 2-d projection boxes which can 
 For numeric output, the algorithm tries to find 2-d projection boxes which can separate out data points  with low variance.
 
 This package has been written in C++ with Python wrapper (Python 2.7).
-Uses boost ver. 1.65.
+Uses boost dependency.
 Uses pthreads for multi-threading support.
 
 Run the following command for building and installing package-
 
-python setup.py install
+python setup.py install [--user]
 
 In python,
 import find_projections.
 
 For creating a wheel distribution, run python setup.py bdist_wheel.
 
-API documentation is included in Python_API_DOC.pdf and usage has been shown in test.py.
+API documentation is included in Python_API_DOC.pdf and usage has been shown in test_projections.py.
 
 Parameter names and values -
 -----------------------------
